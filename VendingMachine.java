@@ -26,6 +26,37 @@ public class VendingMachine {
                 int userInput = scanner.nextInt();
                 if (userInput > 0 && userInput <= snackNames.length) {
                     selection = userInput - 1;
+
+                    double currentAmount = 0;
+                    double itemPrice = snackPrices[selection];
+
+                    do {
+                        try {
+                            System.out.println("Current amount inserted: $" + String.format("%.2f", currentAmount));
+                            System.out.print("Insert $1 bill (Enter 0 to finish): $");
+                            double moneyInserted = scanner.nextDouble();
+
+                            if (moneyInserted == 0) {
+                                double change = currentAmount - itemPrice;
+                    
+                                if (change < 0) {
+                                    System.out.println("Error: Insufficient funds. Please insert more $1 bills.");
+                                } else if (change > 0) {
+                                    System.out.println("Exact change: $" + String.format("%.2f", change));
+                                    break;
+                                }
+                            } else if (moneyInserted == 1) {
+                                currentAmount += moneyInserted;
+                            } else {
+                                System.out.println("Error: Only $1 bills are accepted. Please try again.");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error: Invalid input. Please enter a valid number.");
+                            scanner.nextLine();
+                        }
+                    } while (true);
+
+                    
                 }
                 else {
                     System.out.println("Error: That number does not correspond with a snack item, please try again.");
