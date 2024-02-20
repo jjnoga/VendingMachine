@@ -56,6 +56,29 @@ public class VendingMachine {
                         }
                     } while (true);
 
+                    System.out.println("Please confirm that you would like to make this transaction (y/n)");
+                    scanner.nextLine();
+                    String input = scanner.nextLine();
+                    while (!input.equals("y") && !input.equals("n")) {
+                        System.out.println("Unrecognized input -- please try again. Enter y to confirm, n to cancel");
+                        input = scanner.nextLine();
+                    }
+                    if (input.equals("y")) {
+                        System.out.println("Here is your snack!");
+                        System.out.println("WHIRRRRRRRRRR");
+                        double change = currentAmount - itemPrice;
+                        if (change > 0) {
+                            System.out.println("And here is your change of " + String.format("$%.2f", change));
+                            System.out.println("CLUNK CLUNK CLUNK");
+                        }
+                        System.out.println("GREAT snack choice by the way, you have great taste! Goodbye!");
+                        System.exit(0);
+                    }
+                    else {
+                        System.out.println("Canceling Transaction...");
+                        System.out.println("Returning your money. Have a great day!");
+                        System.exit(0);
+                    }
                     
                 }
                 else {
